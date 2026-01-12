@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user;
+option go_package = "github.com/hitesh-babariya/proto/user/v1;userpb";
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
+
+message GetUserRequest {
+  int32 id = 1;
+}
+
+message GetUserResponse {
+  int32 id = 1;
+  string name = 2;
+}
