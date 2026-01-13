@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package order;
+option go_package = "github.com/hitesh-babariya/proto/order/v1;orderpb";
+
+service OrderService {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+}
+
+message CreateOrderRequest {
+  int32 user_id = 1;
+  string item = 2;
+}
+
+message CreateOrderResponse {
+  int32 order_id = 1;
+}
