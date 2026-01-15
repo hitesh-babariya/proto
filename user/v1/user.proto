@@ -6,8 +6,12 @@ option go_package = "github.com/hitesh-babariya/proto/user/v1;userpb";
 service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserResponse);
 }
 
+message GetUserByIDRequest {
+  string id = 1;
+}
 message GetUserRequest {
   int32 id = 1;
 }
