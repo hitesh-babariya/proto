@@ -7,11 +7,28 @@ service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserResponse);
+  rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
 }
 
+// Request for getting all users
+message GetUsersRequest {
+  // keep empty for now
+}
+
+// Response for getting all users list in response
+message GetUsersResponse {
+  repeated User users = 1;    // repeated means “this field holds a list of values”, and it is required whenever your API returns multiple items.
+}
+message User {          // User is a model/data structure
+  int32 id = 1;
+  string name = 2;
+}
+
+// Request for getting user by id
 message GetUserByIDRequest {
   string id = 1;
 }
+// Request for getting user by id
 message GetUserRequest {
   int32 id = 1;
 }
