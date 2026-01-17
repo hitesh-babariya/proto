@@ -4,6 +4,7 @@ package user;
 option go_package = "github.com/hitesh-babariya/proto/user/v1;userpb";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
@@ -52,7 +53,8 @@ message CreateUserResponse {
 
 message UpdateUserRequest {
   int32 id = 1;       // id of user to update
-  string name = 2;    // updated name
+  //string name = 2;    // updated name
+  google.protobuf.StringValue name = 2; // optional update(Using StringValue allows optional updates without sending empty strings.)
 }
 
 message UpdateUserResponse {

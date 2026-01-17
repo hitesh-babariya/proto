@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -387,9 +388,10 @@ func (x *CreateUserResponse) GetId() int32 {
 }
 
 type UpdateUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`    // id of user to update
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // updated name
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // id of user to update
+	// string name = 2;    // updated name
+	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // optional update(Using StringValue allows optional updates without sending empty strings.)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,11 +433,11 @@ func (x *UpdateUserRequest) GetId() int32 {
 	return 0
 }
 
-func (x *UpdateUserRequest) GetName() string {
+func (x *UpdateUserRequest) GetName() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Name
 	}
-	return ""
+	return nil
 }
 
 type UpdateUserResponse struct {
@@ -486,7 +488,7 @@ var File_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/v1/user.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\"\x11\n" +
+	"\x12user/v1/user.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x11\n" +
 	"\x0fGetUsersRequest\"4\n" +
 	"\x10GetUsersResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
@@ -504,10 +506,10 @@ const file_user_v1_user_proto_rawDesc = "" +
 	"\x11CreateUserRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"$\n" +
 	"\x12CreateUserResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\"7\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"U\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"4\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x120\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\"4\n" +
 	"\x12UpdateUserResponse\x12\x1e\n" +
 	"\x04user\x18\x01 \x01(\v2\n" +
 	".user.UserR\x04user2\xfe\x02\n" +
@@ -536,38 +538,40 @@ func file_user_v1_user_proto_rawDescGZIP() []byte {
 
 var file_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_v1_user_proto_goTypes = []any{
-	(*GetUsersRequest)(nil),    // 0: user.GetUsersRequest
-	(*GetUsersResponse)(nil),   // 1: user.GetUsersResponse
-	(*User)(nil),               // 2: user.User
-	(*GetUserByIDRequest)(nil), // 3: user.GetUserByIDRequest
-	(*GetUserRequest)(nil),     // 4: user.GetUserRequest
-	(*GetUserResponse)(nil),    // 5: user.GetUserResponse
-	(*CreateUserRequest)(nil),  // 6: user.CreateUserRequest
-	(*CreateUserResponse)(nil), // 7: user.CreateUserResponse
-	(*UpdateUserRequest)(nil),  // 8: user.UpdateUserRequest
-	(*UpdateUserResponse)(nil), // 9: user.UpdateUserResponse
-	(*emptypb.Empty)(nil),      // 10: google.protobuf.Empty
+	(*GetUsersRequest)(nil),        // 0: user.GetUsersRequest
+	(*GetUsersResponse)(nil),       // 1: user.GetUsersResponse
+	(*User)(nil),                   // 2: user.User
+	(*GetUserByIDRequest)(nil),     // 3: user.GetUserByIDRequest
+	(*GetUserRequest)(nil),         // 4: user.GetUserRequest
+	(*GetUserResponse)(nil),        // 5: user.GetUserResponse
+	(*CreateUserRequest)(nil),      // 6: user.CreateUserRequest
+	(*CreateUserResponse)(nil),     // 7: user.CreateUserResponse
+	(*UpdateUserRequest)(nil),      // 8: user.UpdateUserRequest
+	(*UpdateUserResponse)(nil),     // 9: user.UpdateUserResponse
+	(*wrapperspb.StringValue)(nil), // 10: google.protobuf.StringValue
+	(*emptypb.Empty)(nil),          // 11: google.protobuf.Empty
 }
 var file_user_v1_user_proto_depIdxs = []int32{
 	2,  // 0: user.GetUsersResponse.users:type_name -> user.User
-	2,  // 1: user.UpdateUserResponse.user:type_name -> user.User
-	4,  // 2: user.UserService.GetUser:input_type -> user.GetUserRequest
-	6,  // 3: user.UserService.CreateUser:input_type -> user.CreateUserRequest
-	3,  // 4: user.UserService.GetUserByID:input_type -> user.GetUserByIDRequest
-	0,  // 5: user.UserService.GetUsers:input_type -> user.GetUsersRequest
-	4,  // 6: user.UserService.DeleteUser:input_type -> user.GetUserRequest
-	8,  // 7: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
-	5,  // 8: user.UserService.GetUser:output_type -> user.GetUserResponse
-	7,  // 9: user.UserService.CreateUser:output_type -> user.CreateUserResponse
-	5,  // 10: user.UserService.GetUserByID:output_type -> user.GetUserResponse
-	1,  // 11: user.UserService.GetUsers:output_type -> user.GetUsersResponse
-	10, // 12: user.UserService.DeleteUser:output_type -> google.protobuf.Empty
-	9,  // 13: user.UserService.UpdateUser:output_type -> user.UpdateUserResponse
-	8,  // [8:14] is the sub-list for method output_type
-	2,  // [2:8] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	10, // 1: user.UpdateUserRequest.name:type_name -> google.protobuf.StringValue
+	2,  // 2: user.UpdateUserResponse.user:type_name -> user.User
+	4,  // 3: user.UserService.GetUser:input_type -> user.GetUserRequest
+	6,  // 4: user.UserService.CreateUser:input_type -> user.CreateUserRequest
+	3,  // 5: user.UserService.GetUserByID:input_type -> user.GetUserByIDRequest
+	0,  // 6: user.UserService.GetUsers:input_type -> user.GetUsersRequest
+	4,  // 7: user.UserService.DeleteUser:input_type -> user.GetUserRequest
+	8,  // 8: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
+	5,  // 9: user.UserService.GetUser:output_type -> user.GetUserResponse
+	7,  // 10: user.UserService.CreateUser:output_type -> user.CreateUserResponse
+	5,  // 11: user.UserService.GetUserByID:output_type -> user.GetUserResponse
+	1,  // 12: user.UserService.GetUsers:output_type -> user.GetUsersResponse
+	11, // 13: user.UserService.DeleteUser:output_type -> google.protobuf.Empty
+	9,  // 14: user.UserService.UpdateUser:output_type -> user.UpdateUserResponse
+	9,  // [9:15] is the sub-list for method output_type
+	3,  // [3:9] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_user_v1_user_proto_init() }
