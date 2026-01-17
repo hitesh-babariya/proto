@@ -11,6 +11,7 @@ service UserService {
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserResponse);
   rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
   rpc DeleteUser (GetUserRequest) returns (google.protobuf.Empty);  // For empty responses use this
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
 }
 
 // Request for getting all users
@@ -47,4 +48,13 @@ message CreateUserRequest {
 
 message CreateUserResponse {
   int32 id = 1;
+}
+
+message UpdateUserRequest {
+  int32 id = 1;       // id of user to update
+  string name = 2;    // updated name
+}
+
+message UpdateUserResponse {
+  User user = 1;
 }
