@@ -9,6 +9,7 @@ package userpb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -158,7 +159,7 @@ func (x *User) GetName() string {
 // Request for getting user by id
 type GetUserByIDRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -193,11 +194,11 @@ func (*GetUserByIDRequest) Descriptor() ([]byte, []int) {
 	return file_user_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserByIDRequest) GetId() string {
+func (x *GetUserByIDRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 // Request for getting user by id
@@ -389,7 +390,7 @@ var File_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/v1/user.proto\x12\x04user\"\x11\n" +
+	"\x12user/v1/user.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\"\x11\n" +
 	"\x0fGetUsersRequest\"4\n" +
 	"\x10GetUsersResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
@@ -398,7 +399,7 @@ const file_user_v1_user_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"$\n" +
 	"\x12GetUserByIDRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\" \n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\" \n" +
 	"\x0eGetUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\"5\n" +
 	"\x0fGetUserResponse\x12\x0e\n" +
@@ -407,15 +408,15 @@ const file_user_v1_user_proto_rawDesc = "" +
 	"\x11CreateUserRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"$\n" +
 	"\x12CreateUserResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id2\xbc\x02\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id2\xbd\x02\n" +
 	"\vUserService\x126\n" +
 	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\x12?\n" +
 	"\n" +
 	"CreateUser\x12\x17.user.CreateUserRequest\x1a\x18.user.CreateUserResponse\x12>\n" +
 	"\vGetUserByID\x12\x18.user.GetUserByIDRequest\x1a\x15.user.GetUserResponse\x129\n" +
-	"\bGetUsers\x12\x15.user.GetUsersRequest\x1a\x16.user.GetUsersResponse\x129\n" +
+	"\bGetUsers\x12\x15.user.GetUsersRequest\x1a\x16.user.GetUsersResponse\x12:\n" +
 	"\n" +
-	"DeleteUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponseB1Z/github.com/hitesh-babariya/proto/user/v1;userpbb\x06proto3"
+	"DeleteUser\x12\x14.user.GetUserRequest\x1a\x16.google.protobuf.EmptyB1Z/github.com/hitesh-babariya/proto/user/v1;userpbb\x06proto3"
 
 var (
 	file_user_v1_user_proto_rawDescOnce sync.Once
@@ -439,6 +440,7 @@ var file_user_v1_user_proto_goTypes = []any{
 	(*GetUserResponse)(nil),    // 5: user.GetUserResponse
 	(*CreateUserRequest)(nil),  // 6: user.CreateUserRequest
 	(*CreateUserResponse)(nil), // 7: user.CreateUserResponse
+	(*emptypb.Empty)(nil),      // 8: google.protobuf.Empty
 }
 var file_user_v1_user_proto_depIdxs = []int32{
 	2, // 0: user.GetUsersResponse.users:type_name -> user.User
@@ -451,7 +453,7 @@ var file_user_v1_user_proto_depIdxs = []int32{
 	7, // 7: user.UserService.CreateUser:output_type -> user.CreateUserResponse
 	5, // 8: user.UserService.GetUserByID:output_type -> user.GetUserResponse
 	1, // 9: user.UserService.GetUsers:output_type -> user.GetUsersResponse
-	5, // 10: user.UserService.DeleteUser:output_type -> user.GetUserResponse
+	8, // 10: user.UserService.DeleteUser:output_type -> google.protobuf.Empty
 	6, // [6:11] is the sub-list for method output_type
 	1, // [1:6] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

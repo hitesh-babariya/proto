@@ -3,12 +3,14 @@ syntax = "proto3";
 package user;
 option go_package = "github.com/hitesh-babariya/proto/user/v1;userpb";
 
+import "google/protobuf/empty.proto";
+
 service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserResponse);
   rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
-  rpc DeleteUser (GetUserRequest) returns (GetUserResponse);
+  rpc DeleteUser (GetUserRequest) returns (google.protobuf.Empty);  // For empty responses use this
 }
 
 // Request for getting all users
@@ -27,7 +29,7 @@ message User {          // User is a model/data structure
 
 // Request for getting user by id
 message GetUserByIDRequest {
-  string id = 1;
+  int32 id = 1;
 }
 // Request for getting user by id
 message GetUserRequest {
